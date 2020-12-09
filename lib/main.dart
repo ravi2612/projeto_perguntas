@@ -1,33 +1,56 @@
 import 'package:flutter/material.dart';
-import 'package:projeto_perguntas/questionario.dart';
-import './questao.dart';
-import './resposta.dart';
+import './questionario.dart';
 import './resultado.dart';
+
 main() => runApp(PerguntaApp());
 
 class _PerguntaAppState extends State<PerguntaApp> {
   var _perguntaSelecionada = 0;
+  var _notaTotal = 0;
   final _perguntas = const [
     {
       'texto': ' Qual é a sua cor favorita?',
-      'respostas': ['Preto', 'Vermelho', 'Verde', 'Branco']
+      'respostas': [
+        {'texto': 'Preto', 'nota': 1},
+        {'texto': 'Vermelho', 'nota': 2},
+        {'texto': 'Verde', 'nota': 3},
+        {'texto': 'Branco', 'nota': 4}
+      ]
     },
     {
       'texto': ' Qual é seu animal favorito?',
-      'respostas': ['Coelho', 'Cobra', 'Elefante', 'Leao'],
+      'respostas': [
+        {'texto': 'Coelho', 'nota': 4},
+        {'texto': 'Cobra', 'nota': 6},
+        {'texto': 'Elefante', 'nota': 8},
+        {'texto': 'Leao', 'nota': 9}
+      ]
     },
     {
       'texto': 'Qual seu esporte favorito ? ',
-      'respostas': ['Futebol', 'Basquete', 'Volei', 'Nataçao']
+      'respostas': [
+        {'text': 'Futebol', 'nota': 5},
+        {'text': 'Basquete', 'nota': 7},
+        {'text': 'Volei', 'nota': 9},
+        {'text': 'Nataçao', 'nota': 6}
+      ]
     }
   ];
 
-  void _responder() {
-    if(temPerguntaSelecionada){
-        setState(() {
-          _perguntaSelecionada++;
-        });
+  void _responder(int nota) {
+    if (temPerguntaSelecionada) {
+      setState(() {
+        _perguntaSelecionada++;
+        _notaTotal += nota;
+      });
     }
+  }
+
+  void _reiniciarQuestionario() {
+    setState(() {
+      _perguntaSelecionada = 0;
+      _notaTotal = 0;
+    });
   }
 
   bool get temPerguntaSelecionada {
@@ -36,24 +59,18 @@ class _PerguntaAppState extends State<PerguntaApp> {
 
   @override
   Widget build(BuildContext context) {
-     //funcional
-
-    //for (var textoResp in respostas) {             //imperativa
-    // widgets.add(Resposta(textoResp, _responder));
-    // }
-
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
           title: Text('Perguntas'),
-      ),
-      body: temPerguntaSelecionada 
-        ? Questionario(
-          perguntas: _perguntas ,
-          perguntaSelecionada: _perguntaSelecionada,
-          quandoResponder: _responder,
-        ) 
-        : Resultado() , 
+        ),
+        body: temPerguntaSelecionada
+            ? Questionario(
+                perguntas: _perguntas,
+                perguntaSelecionada: _perguntaSelecionada,
+                quandoResponder: _responder,
+              )
+            : Resultado(_notaTotal,_reiniciarQuestionario),
       ),
     );
   }
