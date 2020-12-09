@@ -62,9 +62,15 @@ class _PerguntaAppState extends State<PerguntaApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Scaffold(
+      home: Scaffold(        
         appBar: AppBar(
-          title: Text('Perguntas'),
+          title: Text(
+            'Perguntas',
+            style: TextStyle(
+              fontSize: 40
+              
+            ),
+            ),
         ),
         body: temPerguntaSelecionada
             ? Questionario(

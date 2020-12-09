@@ -1,4 +1,7 @@
+
+
 import 'package:flutter/material.dart';
+import 'package:random_color/random_color.dart';
 
 class Resultado extends StatelessWidget {
   final int nota;
@@ -19,21 +22,26 @@ class Resultado extends StatelessWidget {
   }
 
   Widget build(BuildContext context) {
+    RandomColor randomColor = RandomColor();
+    Color color = randomColor.randomColor();
+
     return Column(
-      mainAxisAlignment: MainAxisAlignment.center ,
-      children:<Widget> [
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
         Center(
           child: Text(
             fraseResultado,
-            style: TextStyle(fontSize: 30),
+            style: TextStyle(fontSize: 50, color: color),
           ),
         ),
+        Container(height: 200,),
         FlatButton(
-           child: Text('Reiniciar',
-           style: TextStyle(fontSize: 18),
-           ),
-           textColor: Colors.blue,
-           onPressed: quandoReiniciarQuestionario ,
+          child: Text(
+            'Reiniciar',
+            style: TextStyle(fontSize: 25),
+          ),
+            textColor: Colors.redAccent,
+            onPressed: quandoReiniciarQuestionario,
         )
       ],
     );
