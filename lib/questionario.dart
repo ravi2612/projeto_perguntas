@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import './questao.dart';
 import './resposta.dart';
@@ -24,6 +26,7 @@ class Questionario extends StatelessWidget {
         : null;
 
     return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
       children: <Widget>[
         Questao(perguntas[perguntaSelecionada]['texto']),
         ...respostas.map((resp) {
