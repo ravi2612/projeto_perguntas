@@ -27,20 +27,22 @@ class _PerguntaAppState extends State<PerguntaApp> {
       ]
     },
     {
-      'texto': 'Qual seu esporte favorito ? ',
+      'texto': ' Qual é seu esporte favorito?',
       'respostas': [
-        {'text': 'Futebol', 'nota': 5},
-        {'text': 'Basquete', 'nota': 7},
-        {'text': 'Volei', 'nota': 9},
-        {'text': 'Nataçao', 'nota': 6}
+        {'texto': 'volei', 'nota': 4},
+        {'texto': 'basquete', 'nota': 6},
+        {'texto': 'tenis', 'nota': 8},
+        {'texto': 'nataçao', 'nota': 9}
       ]
-    }
+    },
+   //esporte esta com erro runtime type
+    
   ];
 
   void _responder(int nota) {
     if (temPerguntaSelecionada) {
       setState(() {
-        _perguntaSelecionada++;
+        _perguntaSelecionada ++;
         _notaTotal += nota;
       });
     }
